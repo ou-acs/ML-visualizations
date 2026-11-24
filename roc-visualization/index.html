@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive ROC Curve — AUC and Threshold</title>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 950px;
+      margin: 32px auto;
+      padding: 0 16px;
+      color: #222;
+    }
+    .controls { margin: 18px 0; }
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 14px 0;
+    }
+    input[type="range"] { width: min(460px, 70vw); }
+    .value { min-width: 52px; font-weight: bold; }
+    #rocChart { width: 100%; height: 540px; }
+    #metrics { margin-top: 8px; line-height: 1.6; }
+    .note { color: #555; font-size: 0.92rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h2>Interactive Theoretical ROC Curve</h2>
+
+  <div class="controls">
+    <div class="control-row">
+      <label for="aucSlider">Target AUROC:</label>
+      <input type="range" id="aucSlider" min="0.50" max="0.99"
+             step="0.01" value="0.85">
+      <span class="value" id="aucValue">0.85</span>
+    </div>
+
+    <div class="control-row">
+      <label for="thresholdSlider">Classification threshold:</label>
+      <input type="range" id="thresholdSlider" min="0" max="1"
+             step="0.001" value="0.5">
+      <span class="value" id="thresholdValue">0.500</span>
+    </div>
+  </div>
+
+  <div id="rocChart"></div>
+  <p id="metrics"></p>
+  <p class="note">
+    This is a theoretical ROC curve based on two equal-variance normal score
+    distributions. AUROC controls the separation between the positive- and
+    negative-class distributions. The threshold slider moves the operating
+    point along the curve.
+  </p>
+
+  <script src="script.js"></script>
+</body>
+</html>
